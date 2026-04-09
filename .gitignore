@@ -1,4 +1,5 @@
 # Root .gitignore
+.github/
 
 # Java / Maven
 backend/target/
