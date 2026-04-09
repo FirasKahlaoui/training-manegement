@@ -1,0 +1,19 @@
+# Root .gitignore
+
+# Java / Maven
+backend/target/
+backend/.mvn/
+backend/*.jar
+
+# Node / React
+frontend/node_modules/
+frontend/build/
+frontend/.pnp
+frontend/.pnp.js
+
+# IDEs and OS
+.idea/
+.vscode/
+.DS_Store
+*.log
+.env
