@@ -14,9 +14,7 @@ import org.springframework.boot.security.autoconfigure.web.servlet.ServletWebSec
     UserDetailsServiceAutoConfiguration.class
 })
 public class TrainingManagementApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(TrainingManagementApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(TrainingManagementApplication.class, args);
+    }
 }
