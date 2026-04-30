@@ -1,0 +1,126 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="DetailedUseCases" name="Detailed System Use Cases">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- System Boundary -->
+        <mxCell id="system" value="TrainingMS - Système de Gestion des Formations" style="swimlane;whiteSpace=wrap;html=1;startSize=30;" vertex="1" parent="1">
+          <mxGeometry x="240" y="20" width="400" height="920" as="geometry" />
+        </mxCell>
+        
+        <!-- Authentication -->
+        <mxCell id="uc_login" value="S'authentifier (Login)" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="system">
+          <mxGeometry x="100" y="40" width="200" height="50" as="geometry" />
+        </mxCell>
+        
+        <!-- Training Management -->
+        <mxCell id="uc_view_form" value="Consulter le catalogue&#10;(Filtres année/domaine)" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="system">
+          <mxGeometry x="100" y="110" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_create_form" value="Créer une formation" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="system">
+          <mxGeometry x="100" y="180" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_edit_form" value="Modifier une formation" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="system">
+          <mxGeometry x="100" y="240" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_delete_form" value="Supprimer une formation" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="system">
+          <mxGeometry x="100" y="300" width="200" height="50" as="geometry" />
+        </mxCell>
+        
+        <!-- Registration Management -->
+        <mxCell id="uc_inscrire" value="Inscrire un participant" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="system">
+          <mxGeometry x="100" y="370" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_desinscrire" value="Désinscrire un participant" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="system">
+          <mxGeometry x="100" y="430" width="200" height="50" as="geometry" />
+        </mxCell>
+        
+        <!-- Participant Management -->
+        <mxCell id="uc_manage_part" value="Gérer les fiches participants&#10;(CRUD)" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="system">
+          <mxGeometry x="100" y="500" width="200" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Reference Data -->
+        <mxCell id="uc_manage_ref" value="Gérer les référentiels&#10;(Domaines, Profils, Structures)" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="system">
+          <mxGeometry x="100" y="580" width="200" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Dashboard/Stats -->
+        <mxCell id="uc_stats" value="Consulter le tableau de bord&#10;(Statistiques)" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="system">
+          <mxGeometry x="100" y="660" width="200" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- User Management -->
+        <mxCell id="uc_manage_users" value="Gérer les comptes utilisateurs" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="system">
+          <mxGeometry x="100" y="740" width="200" height="50" as="geometry" />
+        </mxCell>
+        
+        <!-- Actors -->
+        <mxCell id="user_simple" value="Utilisateur Simple" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="80" y="240" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="manager" value="Manager" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="80" y="600" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="admin" value="Administrateur" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="80" y="800" width="30" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Associations - User Simple -->
+        <mxCell id="edge1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="user_simple" target="uc_login">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="user_simple" target="uc_view_form">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="user_simple" target="uc_create_form">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="user_simple" target="uc_inscrire">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="user_simple" target="uc_manage_part">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Associations - Manager -->
+        <mxCell id="edge6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="manager" target="uc_stats">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Manager inherits from User (Simplified connection) -->
+        <mxCell id="edge7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="manager" target="uc_view_form">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="160" y="630" />
+              <mxPoint x="160" y="140" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Associations - Admin -->
+        <mxCell id="edge8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="admin" target="uc_manage_users">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="admin" target="uc_manage_ref">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="180" y="830" />
+              <mxPoint x="180" y="610" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="admin" target="uc_delete_form">
+          <mxGeometry relative="1" as="geometry">
+             <Array as="points">
+              <mxPoint x="200" y="830" />
+              <mxPoint x="200" y="325" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

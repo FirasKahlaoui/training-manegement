@@ -1,0 +1,80 @@
+\documentclass[12pt,a4paper]{report}
+
+\input{preamble}
+
+\begin{document}
+
+% --- Cover Page ---
+\begin{titlepage}
+    \centering
+    \hspace{-1cm}
+    \begin{minipage}[l]{0.2\columnwidth}
+        \includegraphics[width=1.1\columnwidth]{Figures/LogoISI.png}\\
+    \end{minipage}
+    \hfill
+    \begin{minipage}[l]{0.6\columnwidth}
+        \centering
+        \footnotesize
+        \textbf{\textsc{Republic of Tunisia}}\\
+        \textbf{\textsc{Ministry of Higher Education and Scientific Research}}\\
+        \textbf{\textsc{University of Tunis El Manar}}\\
+        \textbf{\textsc{Higher Institute of Computer Science}}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[l]{0.2\columnwidth}
+        \includegraphics[width=0.7\textwidth]{Figures/logoutm.jpg}\\
+    \end{minipage}
+    
+    \vspace{2cm}
+
+    \hr{0.5pt}
+    \vspace{0.4cm}
+    {\huge \bfseries Design and Development of a Training Management System}\\[0.4cm]
+    \hr{0.5pt}
+    \vspace{1.5cm}
+
+    \begin{minipage}{0.45\textwidth}
+        \begin{flushleft} \large
+            \emph{Authors:}\\
+            \textbf{Firas Kahlaoui}\\
+            \textbf{Ahmed Chaabane}\\
+            \textbf{Seifdine Ben Fradj}
+        \end{flushleft}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \begin{flushright} \large
+            \emph{Academic Year:}\\
+            \textbf{2025/2026}
+        \end{flushright}
+    \end{minipage}
+
+    \vfill
+    {\large \today}
+\end{titlepage}
+
+% --- Abstract ---
+\chapter*{Abstract}
+This project focuses on the design and development of a web-based training management system intended to improve the organization, monitoring, and evaluation of professional training activities. The existing approach relies on manual processes using paper documents and spreadsheet tools, which leads to inefficiencies, redundancy, and data inconsistency. The proposed system introduces a centralized platform that allows users to manage training sessions, participants, and trainers in a structured and reliable way. It also provides a statistical analysis module to support decision-making. The implementation of this system reduces administrative workload, improves data accuracy, and enhances the overall efficiency of training management.
+
+\tableofcontents
+
+\chapter{Introduction}
+\input{sections/intro}
+
+\chapter{Project Context and Analysis}
+\input{sections/analysis}
+
+\chapter{Design and Modeling}
+\input{sections/design}
+
+\chapter{Implementation and Technologies}
+\input{sections/implementation}
+
+\chapter{Testing and Results}
+\input{sections/testing}
+
+\chapter{Conclusion and Future Work}
+\input{sections/conclusion}
+
+\end{document}

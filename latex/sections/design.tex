@@ -1,0 +1,48 @@
+\section{Actors and Roles}
+The TrainingMS system defines three distinct user profiles to ensure secure and efficient operations:
+\begin{itemize}
+    \item \textbf{Simple User}: Responsible for operational tasks. This role can create, modify, and manage training sessions (formations), update participant information, and link trainers to specific sessions.
+    \item \textbf{Manager}: A supervisory role focused on oversight. Managers have read-only access to the system's data and are primarily intended to use the statistics dashboard to monitor performance and budget allocation.
+    \item \textbf{Administrator}: Holds full system privileges. Beyond operational capabilities, the Admin manages user accounts, roles, and the core referential data such as domains, structures, and professional profiles.
+\end{itemize}
+
+\section{Functional Requirements}
+The application must support the following core capabilities:
+\begin{itemize}
+    \item \textbf{Authentication}: Secure login and logout using JSON Web Tokens (JWT).
+    \item \textbf{CRUD Operations}: Comprehensive management (Create, Read, Update, Delete) for participants, trainers, sessions, and reference tables.
+    \item \textbf{Training Planning}: Ability to schedule sessions, assign trainers, and enroll participants.
+    \item \textbf{Dashboarding}: Real-time display of aggregated statistics and trends.
+\end{itemize}
+
+\section{Non-Functional Requirements}
+To ensure a professional-grade application, several non-functional aspects were prioritized:
+\begin{itemize}
+    \item \textbf{Security}: Implementation of role-based access control (RBAC) and password encryption.
+    \item \textbf{Performance}: Optimization of database queries to handle growing datasets efficiently.
+    \item \textbf{Usability}: A responsive and intuitive user interface designed to minimize the learning curve.
+    \item \textbf{Data Integrity}: Strict adherence to relational constraints and input validation.
+\end{itemize}
+
+\section{UML Design}
+\subsection{Use Case Diagram}
+The Use Case Diagram illustrates the interactions between the identified actors and the system's functionalities. The primary use cases include "Manage Formations", "Register Participants", and "Consult Dashboard", with administrative tasks such as "Manage Users" reserved for the Admin actor.
+
+\subsection{Class Diagram}
+The core logic of the system is modeled through several interrelated entities:
+\begin{itemize}
+    \item \textbf{User \& Role}: Manage security and permissions.
+    \item \textbf{Training Session}: The central entity representing a training session.
+    \item \textbf{Participant \& Trainer}: Entities representing the human capital involved.
+    \item \textbf{Domain, Structure, Profile}: Referential entities that categorize the data.
+\end{itemize}
+Relationships include a Many-to-Many association between \textit{Training Session} and \textit{Participant} (registrations) and Many-to-One links from \textit{Training Session} to \textit{Domain} and \textit{Trainer}.
+
+\section{Database Design}
+The relational schema was designed in MySQL to ensure optimal storage and fast retrieval. The database includes:
+\begin{itemize}
+    \item \textbf{Tables with Primary Keys}: All tables use auto-incremented integers as unique identifiers.
+    \item \textbf{Foreign Key Constraints}: Relationships are enforced through foreign keys (e.g., \textit{idDomain} in the \textit{training session} table).
+    \item \textbf{Integrity Rules}: Cascade operations and nullability constraints are defined to prevent orphaned records.
+\end{itemize}
+This structured approach guarantees that the data remains consistent throughout the application's lifecycle.

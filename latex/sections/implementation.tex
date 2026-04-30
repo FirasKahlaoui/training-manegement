@@ -1,0 +1,37 @@
+\section{Technology Stack}
+The application is built using a modern full-stack architecture to ensure scalability and ease of maintenance:
+\begin{itemize}
+    \item \textbf{Backend (Spring Boot)}: Chosen for its robust security features, dependency injection, and mature ecosystem. It handles the RESTful API and business logic.
+    \item \textbf{Frontend (React)}: A component-based library used to build a dynamic and responsive single-page application (SPA).
+    \item \textbf{Database (MySQL)}: A reliable relational database management system used to store the structured data of the project.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.15\textwidth]{Figures/Spring-Boot-Logo.png} \hspace{1cm}
+    \includegraphics[width=0.15\textwidth]{Figures/react.png} \hspace{1cm}
+    \includegraphics[width=0.15\textwidth]{Figures/MySQL-Logo.png}
+    \caption{Project Technology Stack}
+    \label{fig_tech_stack}
+\end{figure}
+
+\section{System Architecture}
+The backend follows a layered architecture consisting of:
+\begin{itemize}
+    \item \textbf{Controller Layer}: Exposes REST endpoints to the frontend.
+    \item \textbf{Service Layer}: Implements the core business logic and validations.
+    \item \textbf{Repository Layer}: Interface with the database using Spring Data JPA.
+\end{itemize}
+Security is managed via a custom filter that intercept requests to validate JWT signatures, ensuring that only authenticated users with appropriate roles can access specific resources.
+
+\section{User Interface Design}
+The user interface is designed with a focus on productivity. It features a persistent sidebar for navigation, comprehensive data tables with search and pagination capabilities, and modal-based forms for data entry. The responsive layout ensures that the system remains accessible across different device types.
+
+\section{Statistics Module}
+A critical component of TrainingMS is the statistics dashboard. It provides interactive charts (Bar, Pie, and Line charts) that visualize data such as:
+\begin{itemize}
+    \item Training distribution by domain.
+    \item Evolution of training sessions over time.
+    \item Budget utilization by organizational structure.
+\end{itemize}
+The module supports real-time filtering by year, domain, and trainer type. All financial data is formatted in Tunisian Dinars (TND) for local context. The dashboard automatically updates as filters are applied, providing managers with an accurate and instantaneous overview of the training landscape.
