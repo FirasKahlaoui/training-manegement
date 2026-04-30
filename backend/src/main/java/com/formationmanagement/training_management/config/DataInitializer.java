@@ -90,10 +90,10 @@ public class DataInitializer implements CommandLineRunner {
         List<Employeur> employeurs = new ArrayList<>();
         for (String nom : Arrays.asList("TechCorp", "ConsultingGroup", "EduPro", "DataExperts")) {
             Employeur e = new Employeur();
+            e.setNomEmployeur(nom);
             e.setNom(nom);
             e.setAdresse("Adresse de " + nom);
-            e.setTel("0500" + (100000 + rand.nextInt(900000)));
-            e.setEmail("contact@" + nom.toLowerCase() + ".com");
+            e.setTelephone("0500" + (100000 + rand.nextInt(900000)));
             employeurs.add(employeurRepository.save(e));
         }
 
