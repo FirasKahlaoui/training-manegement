@@ -1,64 +1,58 @@
-# TrainingMS - Système de Gestion des Formations
+# TrainingMS - Training Management System
 
-**TrainingMS** est une plateforme SaaS moderne et performante conçue pour la gestion complète du cycle de formation au sein d'une organisation. Développée avec une architecture robuste (Spring Boot & React), elle offre un contrôle granulaire des accès et une interface utilisateur premium.
+**TrainingMS** is a modern and high-performance SaaS platform designed for the complete management of the training cycle within an organization. Developed with a robust architecture (Spring Boot & React), it offers granular access control and a premium user interface.
 
-## 🚀 Fonctionnalités Principales
+## Tech Stack
 
-- **Gestion Opérationnelle** : CRUD complet des formations, participants, formateurs et structures.
-- **Tableau de Bord Analytique** : Visualisation en temps réel des statistiques (budget, distribution par domaine, tendances annuelles).
-- **Contrôle d'Accès (RBAC)** : Système de sécurité strict basé sur trois rôles distincts (Admin, Manager, Utilisateur Simple).
-- **Interface Premium** : Design moderne, typographie "Plus Jakarta Sans", et icônes vectorielles professionnelles.
-
-## 🛠️ Stack Technique
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![MySQL](https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
+![Maven](https://img.shields.io/badge/Apache_Maven-C71A36?style=for-the-badge&logo=Apache%20Maven&logoColor=white)
 
 ### Backend
-- **Framework** : Spring Boot 3.2.5
-- **Sécurité** : Spring Security (JWT / Statefull Auth)
-- **Base de données** : MySQL
-- **Persistence** : Spring Data JPA (Hibernate)
-- **Outils** : Maven, Lombok
+- **Framework**: Spring Boot 3.2.5 (JDK 21)
+- **Security**: Spring Security (JWT Stateless Authentication)
+- **Database**: MySQL 8.0
+- **Persistence**: Spring Data JPA (Hibernate)
+- **Tools**: Maven, Lombok
 
 ### Frontend
-- **Framework** : React 19
-- **Style** : Vanilla CSS (Custom Design Tokens)
-- **Visualisation** : Recharts
-- **Icônes** : Lucide React
-- **Notifications** : React Hot Toast
+- **Framework**: React 19
+- **Styling**: Vanilla CSS (Custom Design Tokens)
+- **Visualization**: Recharts
+- **Icons**: Lucide React
+- **Notifications**: React Hot Toast
 
-## 🔐 Système de Rôles (RBAC)
+## Key Features
 
-1. **Administrateur** : Accès total au système, gestion des utilisateurs, rôles et référentiels.
-2. **Manager (Responsable)** : Accès en lecture seule aux statistiques et aux données pour analyse décisionnelle.
-3. **Utilisateur Simple** : Rôle opérationnel permettant la gestion des données métier (Formations, Participants) sans accès à la configuration système.
+- **Operational Management**: Full CRUD for training sessions, participants, trainers, and organizational structures.
+- **Analytical Dashboard**: Real-time visualization of statistics (budget, domain distribution, annual trends).
+- **Access Control (RBAC)**: Strict security system based on three distinct roles (Admin, Manager, Simple User).
+- **Premium Interface**: Modern design, "Plus Jakarta Sans" typography, and professional vector icons.
 
-## 📦 Installation
+## Role-Based Access Control (RBAC)
 
-### Prérequis
-- Java 17+
-- Node.js 18+
+1. **Administrator**: Full system access, management of users, roles, and reference data.
+2. **Manager (Responsable)**: Read-only access to statistics and data for analytical decision-making.
+3. **Simple User**: Operational role for managing business data (Sessions, Participants) without access to system configuration.
+
+## Installation
+
+### Prerequisites
+- Java 21+
+- Node.js & npm
 - MySQL Server
 
-### Backend
-1. Naviguer dans le dossier `backend`.
-2. Configurer la base de données dans `src/main/resources/application.properties`.
-3. Lancer l'application :
-   ```bash
-   ./mvnw spring-boot:run
-   ```
+### Backend Setup
+1. Create a MySQL database named `training_ms`.
+2. Configure database credentials in `src/main/resources/application.properties`.
+3. Run the project: `mvn spring-boot:run`.
 
-### Frontend
-1. Naviguer dans le dossier `frontend`.
-2. Installer les dépendances :
-   ```bash
-   npm install
-   ```
-3. Lancer le serveur de développement :
-   ```bash
-   npm start
-   ```
-
-## 📄 Documentation
-Un rapport détaillé du projet est disponible dans le dossier `/latex`. Il contient l'analyse des besoins, la conception (MCD/MLD) et les diagrammes de cas d'utilisation.
+### Frontend Setup
+1. Navigate to the `frontend` directory.
+2. Install dependencies: `npm install`.
+3. Start the application: `npm start`.
 
 ---
-© 2026 Green Building Training Center. Tous droits réservés.
+© 2025/2026 - Higher Institute of Computer Science

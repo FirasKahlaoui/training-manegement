@@ -49,24 +49,49 @@ The core logic of the system is modeled through several interrelated entities. T
 \section{Sequence Diagrams}
 Sequence diagrams illustrate the dynamic behavior of the system and the interactions between objects over time.
 
-\subsection{Authentication Process (Login)}
-This diagram details the exchange between the frontend, the AuthController, the AuthService, and the database during the user authentication process.
-
+\subsection{User Authentication}
+This diagram details the exchange between the React frontend, the Security Filter Chain, and the AuthController. It highlights the JWT generation and BCrypt password validation.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{Figures/Sequence_login.png}
-    \caption{Sequence Diagram: User Authentication}
-    \label{fig_seq_login}
+    \includegraphics[width=0.85\textwidth]{Figures/Seq_Auth.png}
+    \caption{Sequence Diagram: User Authentication (Login)}
+    \label{fig_seq_auth}
 \end{figure}
 
-\subsection{Managing Training Sessions (Creation)}
-The following diagram illustrates the workflow for creating a new training session, showing the data validation and persistence layers.
-
+\subsection{Managing Formations}
+Illustrates the workflow for creating or updating training sessions, showing the interaction between the FormationController and the Service layer for data persistence.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\textwidth]{Figures/Create Formation.png}
-    \caption{Sequence Diagram: Adding a New Formation}
-    \label{fig_seq_add_form}
+    \includegraphics[width=0.85\textwidth]{Figures/Seq_Formations.png}
+    \caption{Sequence Diagram: Managing Formations (CRUD)}
+    \label{fig_seq_formations}
+\end{figure}
+
+\subsection{Consulting Dashboard}
+Describes the analytical flow where the StatsController aggregates data from multiple tables to provide real-time metrics for Managers and Administrators.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{Figures/Seq_Dashboard.png}
+    \caption{Sequence Diagram: Consulting Dashboard (Statistics)}
+    \label{fig_seq_dashboard}
+\end{figure}
+
+\subsection{Registering a Participant}
+Details the process of adding a new participant to the system, including the validation of profile and structure assignments.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{Figures/Seq_Participant.png}
+    \caption{Sequence Diagram: Registering a Participant}
+    \label{fig_seq_participant}
+\end{figure}
+
+\subsection{User Management (Admin Only)}
+Illustrates the high-level administrative process for managing system accounts, protected by specific role-based security checks.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{Figures/Seq_Admin.png}
+    \caption{Sequence Diagram: User Management (Administration)}
+    \label{fig_seq_admin}
 \end{figure}
 
 \section{Database Design}
