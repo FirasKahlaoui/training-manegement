@@ -54,5 +54,9 @@
 2. Install dependencies: `npm install`.
 3. Start the application: `npm start`.
 
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
 ---
 © 2025/2026 - Higher Institute of Computer Science
