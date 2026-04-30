@@ -6,6 +6,7 @@ import {
   PieChart, Pie, Cell, Tooltip as RechartsTooltip, Legend, ResponsiveContainer,
   BarChart, Bar, XAxis, YAxis, CartesianGrid, LineChart, Line
 } from 'recharts';
+import { GraduationCap, Users, Briefcase, Wallet } from 'lucide-react';
 
 // Strict color palette matching the SaaS design tokens
 const COLORS = {
@@ -192,10 +193,10 @@ export default function DashboardPage() {
         {/* KPI Cards */}
         <div className="stats-grid" style={{ gridTemplateColumns: 'repeat(4, 1fr)' }}>
           {[
-            { label: 'Formations', value: formatNumber(kpis.formations) },
-            { label: 'Participants', value: formatNumber(kpis.participants) },
-            { label: 'Formateurs', value: formatNumber(kpis.trainers) },
-            { label: 'Budget Global', value: formatCurrencyTND(kpis.budget), isCurrency: true }
+            { label: 'Formations', value: formatNumber(kpis.formations), icon: <GraduationCap size={24} /> },
+            { label: 'Participants', value: formatNumber(kpis.participants), icon: <Users size={24} /> },
+            { label: 'Formateurs', value: formatNumber(kpis.trainers), icon: <Briefcase size={24} /> },
+            { label: 'Budget Global', value: formatCurrencyTND(kpis.budget), isCurrency: true, icon: <Wallet size={24} /> }
           ].map((stat, idx) => (
             <div className="stat-card" key={idx}>
               {loading ? (
@@ -205,7 +206,10 @@ export default function DashboardPage() {
                 </>
               ) : (
                 <>
-                  <div className="stat-label">{stat.label}</div>
+                  <div className="stat-header">
+                    <div className="stat-label">{stat.label}</div>
+                    <div className="stat-icon">{stat.icon}</div>
+                  </div>
                   <div className="stat-value" style={{ color: stat.isCurrency ? COLORS.accentDark : COLORS.primary, fontSize: stat.isCurrency ? '24px' : '32px' }}>
                     {stat.value}
                   </div>

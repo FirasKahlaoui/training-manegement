@@ -5,6 +5,7 @@ import Modal from '../components/ui/Modal';
 import FormField from '../components/ui/FormField';
 import api from '../api/axios';
 import toast from 'react-hot-toast';
+import { Plus } from 'lucide-react';
 
 const emptyForm = { login: '', password: '', roleId: '' };
 
@@ -109,8 +110,8 @@ export default function UtilisateursPage() {
             <h1 className="page-title">Utilisateurs</h1>
             <p className="page-subtitle">Gérer les comptes et accès (Admin uniquement)</p>
           </div>
-          <button className="btn btn-primary" onClick={openAdd} id="add-user-btn">
-            ＋ Nouvel utilisateur
+          <button className="btn btn-primary" onClick={openAdd}>
+            <Plus size={16} /> Nouvel utilisateur
           </button>
         </div>
 
@@ -124,7 +125,7 @@ export default function UtilisateursPage() {
         )}
 
         <Modal isOpen={modal.open} onClose={closeModal}
-          title={modal.mode === 'add' ? '➕ Nouvel utilisateur' : '✏️ Modifier l\'utilisateur'}
+          title={modal.mode === 'add' ? 'Nouvel utilisateur' : 'Modifier l\'utilisateur'}
           footer={
             <>
               <button className="btn btn-ghost" onClick={closeModal}>Annuler</button>
@@ -145,7 +146,7 @@ export default function UtilisateursPage() {
         </Modal>
 
         <Modal isOpen={deleteModal.open} onClose={() => setDeleteModal({ open: false, item: null })}
-          title="🗑️ Confirmer la suppression"
+          title="Confirmer la suppression"
           footer={
             <>
               <button className="btn btn-ghost" onClick={() => setDeleteModal({ open: false, item: null })}>Annuler</button>

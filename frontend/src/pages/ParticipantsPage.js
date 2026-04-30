@@ -6,6 +6,7 @@ import FormField from '../components/ui/FormField';
 import api from '../api/axios';
 import toast from 'react-hot-toast';
 import { useAuth } from '../context/AuthContext';
+import { Plus } from 'lucide-react';
 
 const emptyForm = { nom: '', prenom: '', email: '', tel: '', profilId: '', structureId: '' };
 
@@ -116,7 +117,7 @@ export default function ParticipantsPage() {
           </div>
           {!isReadOnly && (
             <button className="btn btn-primary" onClick={openAdd} id="add-participant-btn">
-              ＋ Nouveau participant
+              <Plus size={16} /> Nouveau participant
             </button>
           )}
         </div>
@@ -132,7 +133,7 @@ export default function ParticipantsPage() {
 
         <Modal
           isOpen={modal.open} onClose={closeModal}
-          title={modal.mode === 'add' ? '➕ Nouveau participant' : '✏️ Modifier le participant'}
+          title={modal.mode === 'add' ? 'Nouveau participant' : 'Modifier le participant'}
           footer={
             <>
               <button className="btn btn-ghost" onClick={closeModal}>Annuler</button>
@@ -161,7 +162,7 @@ export default function ParticipantsPage() {
         </Modal>
 
         <Modal isOpen={deleteModal.open} onClose={() => setDeleteModal({ open: false, item: null })}
-          title="🗑️ Confirmer la suppression"
+          title="Confirmer la suppression"
           footer={
             <>
               <button className="btn btn-ghost" onClick={() => setDeleteModal({ open: false, item: null })}>Annuler</button>

@@ -5,6 +5,7 @@ import Modal from '../components/ui/Modal';
 import FormField from '../components/ui/FormField';
 import api from '../api/axios';
 import toast from 'react-hot-toast';
+import { Plus, X, Save } from 'lucide-react';
 
 function SimpleCrudPage({ title, subtitle, apiPath, entityLabel, topbarTitle }) {
   const [items, setItems] = useState([]);
@@ -79,12 +80,12 @@ function SimpleCrudPage({ title, subtitle, apiPath, entityLabel, topbarTitle }) 
         )}
 
         <Modal isOpen={modal.open} onClose={closeModal}
-          title={modal.mode === 'add' ? `➕ Nouveau ${entityLabel.toLowerCase()}` : `✏️ Modifier ${entityLabel.toLowerCase()}`}
+          title={modal.mode === 'add' ? `Ajouter un(e) ${entityLabel}` : `Modifier le/la ${entityLabel}`}
           footer={
             <>
-              <button className="btn btn-ghost" onClick={closeModal}>Annuler</button>
+              <button className="btn btn-ghost" onClick={closeModal}><X size={16} /> Annuler</button>
               <button className="btn btn-primary" onClick={handleSave} disabled={saving}>
-                {saving ? 'Sauvegarde...' : 'Enregistrer'}
+                <Save size={16} /> {saving ? 'Sauvegarde...' : 'Enregistrer'}
               </button>
             </>
           }
@@ -94,7 +95,7 @@ function SimpleCrudPage({ title, subtitle, apiPath, entityLabel, topbarTitle }) 
         </Modal>
 
         <Modal isOpen={deleteModal.open} onClose={() => setDeleteModal({ open: false, item: null })}
-          title="🗑️ Confirmer la suppression"
+          title="Confirmer la suppression"
           footer={
             <>
               <button className="btn btn-ghost" onClick={() => setDeleteModal({ open: false, item: null })}>Annuler</button>

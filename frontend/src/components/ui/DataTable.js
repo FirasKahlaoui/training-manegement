@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { Search, Inbox, Edit2, Trash2 } from 'lucide-react';
 
 const PAGE_SIZE = 10;
 
@@ -32,7 +33,9 @@ export default function DataTable({ columns, data, onEdit, onDelete, searchable 
       {searchable && (
         <div className="search-bar" style={{ padding: '20px 24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div className="search-input-wrapper" style={{ position: 'relative', width: '300px' }}>
-            <span className="search-icon" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', opacity: 0.5 }}>🔍</span>
+            <span className="search-icon" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', opacity: 0.5 }}>
+              <Search size={16} />
+            </span>
             <input
               type="text"
               className="form-input"
@@ -73,7 +76,7 @@ export default function DataTable({ columns, data, onEdit, onDelete, searchable 
               <tr>
                 <td colSpan={columns.length + (onEdit || onDelete ? 1 : 0)}>
                   <div className="empty-state">
-                    <div className="empty-icon">📭</div>
+                    <div className="empty-icon"><Inbox size={48} strokeWidth={1} /></div>
                     <p style={{ color: 'var(--color-primary)', fontSize: '16px', fontWeight: 600 }}>Aucune donnée</p>
                     <p style={{ marginTop: '4px' }}>Nous n'avons trouvé aucun enregistrement correspondant.</p>
                   </div>
@@ -91,10 +94,10 @@ export default function DataTable({ columns, data, onEdit, onDelete, searchable 
                     <td style={{ textAlign: 'right' }}>
                       <div className="table-actions" style={{ display: 'flex', gap: '4px', justifyContent: 'flex-end' }}>
                         {onEdit && (
-                          <button className="btn-icon" title="Modifier" onClick={() => onEdit(row)}>✏️</button>
+                          <button className="btn-icon" title="Modifier" onClick={() => onEdit(row)}><Edit2 size={16} /></button>
                         )}
                         {onDelete && (
-                          <button className="btn-icon danger" title="Supprimer" onClick={() => onDelete(row)}>🗑️</button>
+                          <button className="btn-icon danger" title="Supprimer" onClick={() => onDelete(row)}><Trash2 size={16} /></button>
                         )}
                       </div>
                     </td>

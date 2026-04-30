@@ -7,6 +7,7 @@ import api from '../api/axios';
 import toast from 'react-hot-toast';
 import { useAuth } from '../context/AuthContext';
 import { formatCurrencyTND } from '../utils/formatters';
+import { Plus } from 'lucide-react';
 
 const emptyForm = { titre: '', annee: '', duree: '', budget: '', domaineId: '', formateurId: '' };
 
@@ -135,7 +136,7 @@ export default function FormationsPage() {
           </div>
           {!isReadOnly && (
             <button className="btn btn-primary" onClick={openAdd}>
-              ＋ Nouvelle formation
+              <Plus size={16} /> Nouvelle formation
             </button>
           )}
         </div>
@@ -158,7 +159,7 @@ export default function FormationsPage() {
         <Modal
           isOpen={modal.open}
           onClose={closeModal}
-          title={modal.mode === 'add' ? '➕ Nouvelle formation' : '✏️ Modifier la formation'}
+          title={modal.mode === 'add' ? 'Nouvelle formation' : 'Modifier la formation'}
           footer={
             <>
               <button className="btn btn-ghost" onClick={closeModal}>Annuler</button>
@@ -192,7 +193,7 @@ export default function FormationsPage() {
         <Modal
           isOpen={deleteModal.open}
           onClose={() => setDeleteModal({ open: false, item: null })}
-          title="🗑️ Confirmer la suppression"
+          title="Confirmer la suppression"
           footer={
             <>
               <button className="btn btn-ghost" onClick={() => setDeleteModal({ open: false, item: null })}>

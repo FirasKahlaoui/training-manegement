@@ -23,7 +23,9 @@ function AppShell() {
       <Sidebar />
       <div className="app-main">
         <Routes>
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/" element={
+            <Navigate to={user?.role?.toLowerCase() === 'simple utilisateur' ? '/formations' : '/dashboard'} replace />
+          } />
 
           <Route path="/dashboard" element={
             <ProtectedRoute roles={['administrateur', 'responsable']}>
@@ -73,7 +75,9 @@ function AppShell() {
             </ProtectedRoute>
           } />
 
-          <Route path="*" element={<Navigate to="/dashboard" replace />} />
+          <Route path="*" element={
+            <Navigate to={user?.role?.toLowerCase() === 'simple utilisateur' ? '/formations' : '/dashboard'} replace />
+          } />
         </Routes>
       </div>
     </div>
@@ -82,9 +86,12 @@ function AppShell() {
 
 function AuthShell() {
   const { user } = useAuth();
+  
+  const defaultRoute = user?.role?.toLowerCase() === 'simple utilisateur' ? '/formations' : '/dashboard';
+
   return (
     <Routes>
-      <Route path="/login" element={user ? <Navigate to="/dashboard" replace /> : <LoginPage />} />
+      <Route path="/login" element={user ? <Navigate to={defaultRoute} replace /> : <LoginPage />} />
       <Route path="/*" element={user ? <AppShell /> : <Navigate to="/login" replace />} />
     </Routes>
   );

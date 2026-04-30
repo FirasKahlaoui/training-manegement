@@ -6,6 +6,7 @@ import FormField from '../components/ui/FormField';
 import api from '../api/axios';
 import toast from 'react-hot-toast';
 import { useAuth } from '../context/AuthContext';
+import { Plus } from 'lucide-react';
 
 const emptyForm = { nom: '', prenom: '', email: '', tel: '', type: '', employeurId: '' };
 const typeOptions = [
@@ -131,7 +132,7 @@ export default function FormateursPage() {
             </select>
             {!isReadOnly && (
               <button className="btn btn-primary" onClick={openAdd} id="add-formateur-btn">
-                ＋ Nouveau formateur
+                <Plus size={16} /> Nouveau formateur
               </button>
             )}
           </div>
@@ -147,7 +148,7 @@ export default function FormateursPage() {
         )}
 
         <Modal isOpen={modal.open} onClose={closeModal}
-          title={modal.mode === 'add' ? '➕ Nouveau formateur' : '✏️ Modifier le formateur'}
+          title={modal.mode === 'add' ? 'Nouveau formateur' : 'Modifier le formateur'}
           footer={
             <>
               <button className="btn btn-ghost" onClick={closeModal}>Annuler</button>
@@ -174,7 +175,7 @@ export default function FormateursPage() {
         </Modal>
 
         <Modal isOpen={deleteModal.open} onClose={() => setDeleteModal({ open: false, item: null })}
-          title="🗑️ Confirmer la suppression"
+          title="Confirmer la suppression"
           footer={
             <>
               <button className="btn btn-ghost" onClick={() => setDeleteModal({ open: false, item: null })}>Annuler</button>

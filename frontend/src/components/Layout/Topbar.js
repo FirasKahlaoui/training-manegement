@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { LogOut } from 'lucide-react';
 
 const roleLabels = {
   administrateur: 'Administrateur',
@@ -48,8 +49,9 @@ export default function Topbar({ title }) {
           className="btn btn-ghost btn-sm"
           onClick={handleLogout}
           id="logout-btn"
+          style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
         >
-          🚪 Déconnexion
+          <LogOut size={16} /> Déconnexion
         </button>
       </div>
     </header>

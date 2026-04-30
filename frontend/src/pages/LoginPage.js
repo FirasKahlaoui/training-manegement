@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
+import { GraduationCap, AlertTriangle, Loader2, Lock } from 'lucide-react';
 
 export default function LoginPage() {
   const { login } = useAuth();
@@ -25,8 +26,11 @@ export default function LoginPage() {
       const user = await login({ login: form.login, password: form.password });
       toast.success(`Bienvenue, ${user.login} !`);
       const role = user.role?.toLowerCase();
-      if (role === 'manager') navigate('/dashboard');
-      else navigate('/dashboard');
+      if (role === 'simple utilisateur') {
+        navigate('/formations');
+      } else {
+        navigate('/dashboard');
+      }
     } catch (err) {
       const msg =
         err.response?.data?.message ||
@@ -42,13 +46,13 @@ export default function LoginPage() {
     <div className="login-page">
       <div className="login-card">
         <div className="login-logo">
-          <div className="login-logo-icon">🎓</div>
+          <div className="login-logo-icon"><GraduationCap size={32} /></div>
           <h1>TrainingMS</h1>
           <p>Gestion des formations professionnelles</p>
         </div>
 
         <form onSubmit={handleSubmit} noValidate>
-          {error && <div className="login-error">⚠️ {error}</div>}
+          {error && <div className="login-error" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><AlertTriangle size={16} /> {error}</div>}
           <div className="form-grid" style={{ gap: 16, marginBottom: 24 }}>
             <div className="form-field">
               <label className="form-label" htmlFor="login-username">
@@ -89,7 +93,11 @@ export default function LoginPage() {
             style={{ width: '100%', justifyContent: 'center', padding: '12px' }}
             disabled={loading}
           >
-            {loading ? '⏳ Connexion en cours...' : '🔐 Se connecter'}
+            {loading ? (
+              <><Loader2 className="animate-spin" size={16} /> Connexion en cours...</>
+            ) : (
+              <><Lock size={16} /> Se connecter</>
+            )}
           </button>
         </form>
       </div>
