@@ -1,9 +1,9 @@
 \section{Actors and Roles}
 The TrainingMS system defines three distinct user profiles to ensure secure and efficient operations:
 \begin{itemize}
-    \item \textbf{Simple User}: Responsible for operational tasks. This role can create, modify, and manage training sessions (formations), update participant information, and link trainers to specific sessions.
-    \item \textbf{Manager}: A supervisory role focused on oversight. Managers have read-only access to the system's data and are primarily intended to use the statistics dashboard to monitor performance and budget allocation.
-    \item \textbf{Administrator}: Holds full system privileges. Beyond operational capabilities, the Admin manages user accounts, roles, and the core referential data such as domains, structures, and professional profiles.
+    \item \textbf{Simple User}: An operational user responsible for the daily management of training data. Their functionalities include authentication (login/logout), management of formations (creation, editing, deletion, and viewing), participants, and trainers. They also handle assignments, such as enrolling participants and associating trainers with specific sessions.
+    \item \textbf{Manager (Responsable)}: An analytical user focused on evaluation and decision-making. Unlike the Simple User, the Manager has **read-only access** to the system's core data and cannot perform any modification, creation, or deletion. Their primary focus is the statistics dashboard, where they analyze formation counts, participant data, and budget distribution through interactive charts and advanced filters.
+    \item \textbf{Administrator}: A high-level actor with full control over system configuration. Administrators manage user accounts and core referential data (domains, structures, profiles). By inheritance, the Administrator has access to all functionalities of **both** the Simple User (for data management) and the Manager (for analytical overview).
 \end{itemize}
 
 \section{Functional Requirements}
@@ -27,6 +27,13 @@ To ensure a professional-grade application, several non-functional aspects were 
 \section{UML Design}
 \subsection{Use Case Diagram}
 The Use Case Diagram illustrates the interactions between the identified actors and the system's functionalities. The primary use cases include "Manage Formations", "Register Participants", and "Consult Dashboard", with administrative tasks such as "Manage Users" reserved for the Admin actor.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/Use case diagram.png}
+    \caption{TrainingMS Use Case Diagram}
+    \label{fig_use_case}
+\end{figure}
 
 \subsection{Class Diagram}
 The core logic of the system is modeled through several interrelated entities:
