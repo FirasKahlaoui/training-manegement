@@ -5,6 +5,7 @@ import Modal from '../components/ui/Modal';
 import FormField from '../components/ui/FormField';
 import api from '../api/axios';
 import toast from 'react-hot-toast';
+import { formatCurrencyTND } from '../utils/formatters';
 
 const emptyForm = { titre: '', annee: '', duree: '', budget: '', domaineId: '', formateurId: '' };
 
@@ -103,7 +104,7 @@ export default function FormationsPage() {
     { header: 'Titre', accessor: 'titre' },
     { header: 'Année', accessor: 'annee' },
     { header: 'Durée (j)', accessor: 'duree' },
-    { header: 'Budget', key: 'budget', render: (r) => r.budget ? `${r.budget.toLocaleString('fr-FR')} DA` : '—' },
+    { header: 'Budget', key: 'budget', render: (r) => <span style={{ color: 'var(--color-accent)', fontWeight: 500 }}>{formatCurrencyTND(r.budget)}</span> },
     { header: 'Domaine', key: 'domaine', render: (r) => r.domaine ? (
       <span className="badge badge-purple">{r.domaine.libelle}</span>
     ) : '—' },

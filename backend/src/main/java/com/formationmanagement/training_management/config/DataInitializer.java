@@ -45,6 +45,30 @@ public class DataInitializer implements CommandLineRunner {
             System.out.println(">>> Default admin created: login=admin / password=admin123");
         }
 
+        // Seed default user
+        if (!utilisateurRepository.existsByLogin("user")) {
+            Role userRole = roleRepository.findByNom("simple utilisateur")
+                    .orElseThrow(() -> new RuntimeException("Role user not found"));
+            Utilisateur simpleUser = new Utilisateur();
+            simpleUser.setLogin("user");
+            simpleUser.setPassword(passwordEncoder.encode("user123"));
+            simpleUser.setRole(userRole);
+            utilisateurRepository.save(simpleUser);
+            System.out.println(">>> Default user created: login=user / password=user123");
+        }
+
+        // Seed default manager (responsable)
+        if (!utilisateurRepository.existsByLogin("manager")) {
+            Role managerRole = roleRepository.findByNom("responsable")
+                    .orElseThrow(() -> new RuntimeException("Role manager not found"));
+            Utilisateur manager = new Utilisateur();
+            manager.setLogin("manager");
+            manager.setPassword(passwordEncoder.encode("manager123"));
+            manager.setRole(managerRole);
+            utilisateurRepository.save(manager);
+            System.out.println(">>> Default manager created: login=manager / password=manager123");
+        }
+
         // Generate Mock Data for 5 years if DB is empty
         if (formationRepository.count() == 0) {
             System.out.println(">>> Generating 5 years of mock data...");

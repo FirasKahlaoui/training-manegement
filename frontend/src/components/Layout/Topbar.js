@@ -9,7 +9,7 @@ const roleLabels = {
 };
 
 const roleBadges = {
-  administrateur: 'badge badge-purple',
+  administrateur: 'badge badge-teal',
   utilisateur: 'badge badge-blue',
   manager: 'badge badge-green',
 };
