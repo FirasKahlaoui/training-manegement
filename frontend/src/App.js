@@ -26,41 +26,43 @@ function AppShell() {
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
           <Route path="/dashboard" element={
-            <ProtectedRoute><DashboardPage /></ProtectedRoute>
+            <ProtectedRoute roles={['administrateur', 'responsable']}>
+              <DashboardPage />
+            </ProtectedRoute>
           } />
 
           <Route path="/formations" element={
-            <ProtectedRoute roles={['administrateur','utilisateur']}>
+            <ProtectedRoute roles={['administrateur', 'utilisateur', 'responsable', 'simple utilisateur']}>
               <FormationsPage />
             </ProtectedRoute>
           } />
 
           <Route path="/participants" element={
-            <ProtectedRoute roles={['administrateur','utilisateur']}>
+            <ProtectedRoute roles={['administrateur', 'utilisateur', 'responsable', 'simple utilisateur']}>
               <ParticipantsPage />
             </ProtectedRoute>
           } />
 
           <Route path="/formateurs" element={
-            <ProtectedRoute roles={['administrateur','utilisateur']}>
+            <ProtectedRoute roles={['administrateur', 'utilisateur', 'responsable', 'simple utilisateur']}>
               <FormateursPage />
             </ProtectedRoute>
           } />
 
           <Route path="/domaines" element={
-            <ProtectedRoute roles={['administrateur','utilisateur']}>
+            <ProtectedRoute roles={['administrateur']}>
               <DomainesPage />
             </ProtectedRoute>
           } />
 
           <Route path="/structures" element={
-            <ProtectedRoute roles={['administrateur','utilisateur']}>
+            <ProtectedRoute roles={['administrateur']}>
               <StructuresPage />
             </ProtectedRoute>
           } />
 
           <Route path="/profils" element={
-            <ProtectedRoute roles={['administrateur','utilisateur']}>
+            <ProtectedRoute roles={['administrateur']}>
               <ProfilsPage />
             </ProtectedRoute>
           } />

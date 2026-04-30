@@ -5,6 +5,7 @@ import Modal from '../components/ui/Modal';
 import FormField from '../components/ui/FormField';
 import api from '../api/axios';
 import toast from 'react-hot-toast';
+import { useAuth } from '../context/AuthContext';
 
 const emptyForm = { nom: '', prenom: '', email: '', tel: '', type: '', employeurId: '' };
 const typeOptions = [
@@ -13,6 +14,7 @@ const typeOptions = [
 ];
 
 export default function FormateursPage() {
+  const { hasRole } = useAuth();
   const [formateurs, setFormateurs] = useState([]);
   const [employeurs, setEmployeurs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -109,6 +111,8 @@ export default function FormateursPage() {
     error: errors[name],
   });
 
+  const isReadOnly = hasRole('responsable');
+
   return (
     <>
       <Topbar title="Formateurs" />
@@ -125,9 +129,11 @@ export default function FormateursPage() {
               <option value="interne">Interne</option>
               <option value="externe">Externe</option>
             </select>
-            <button className="btn btn-primary" onClick={openAdd} id="add-formateur-btn">
-              ＋ Nouveau formateur
-            </button>
+            {!isReadOnly && (
+              <button className="btn btn-primary" onClick={openAdd} id="add-formateur-btn">
+                ＋ Nouveau formateur
+              </button>
+            )}
           </div>
         </div>
 
@@ -135,8 +141,8 @@ export default function FormateursPage() {
           <div className="loading-spinner"><div className="spinner"></div></div>
         ) : (
           <div className="card" style={{ padding: 0 }}>
-            <DataTable columns={columns} data={filtered} onEdit={openEdit}
-              onDelete={(item) => setDeleteModal({ open: true, item })} />
+            <DataTable columns={columns} data={filtered} onEdit={isReadOnly ? null : openEdit}
+              onDelete={isReadOnly ? null : (item) => setDeleteModal({ open: true, item })} />
           </div>
         )}
 

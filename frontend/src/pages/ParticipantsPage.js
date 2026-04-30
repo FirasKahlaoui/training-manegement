@@ -5,10 +5,12 @@ import Modal from '../components/ui/Modal';
 import FormField from '../components/ui/FormField';
 import api from '../api/axios';
 import toast from 'react-hot-toast';
+import { useAuth } from '../context/AuthContext';
 
 const emptyForm = { nom: '', prenom: '', email: '', tel: '', profilId: '', structureId: '' };
 
 export default function ParticipantsPage() {
+  const { hasRole } = useAuth();
   const [participants, setParticipants] = useState([]);
   const [profils, setProfils] = useState([]);
   const [structures, setStructures] = useState([]);
@@ -101,6 +103,8 @@ export default function ParticipantsPage() {
     error: errors[name],
   });
 
+  const isReadOnly = hasRole('responsable');
+
   return (
     <>
       <Topbar title="Participants" />
@@ -110,17 +114,19 @@ export default function ParticipantsPage() {
             <h1 className="page-title">Participants</h1>
             <p className="page-subtitle">Gérer les participants aux formations</p>
           </div>
-          <button className="btn btn-primary" onClick={openAdd} id="add-participant-btn">
-            ＋ Nouveau participant
-          </button>
+          {!isReadOnly && (
+            <button className="btn btn-primary" onClick={openAdd} id="add-participant-btn">
+              ＋ Nouveau participant
+            </button>
+          )}
         </div>
 
         {loading ? (
           <div className="loading-spinner"><div className="spinner"></div></div>
         ) : (
           <div className="card" style={{ padding: 0 }}>
-            <DataTable columns={columns} data={participants} onEdit={openEdit}
-              onDelete={(item) => setDeleteModal({ open: true, item })} />
+            <DataTable columns={columns} data={participants} onEdit={isReadOnly ? null : openEdit}
+              onDelete={isReadOnly ? null : (item) => setDeleteModal({ open: true, item })} />
           </div>
         )}
 

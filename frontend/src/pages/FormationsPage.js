@@ -5,11 +5,13 @@ import Modal from '../components/ui/Modal';
 import FormField from '../components/ui/FormField';
 import api from '../api/axios';
 import toast from 'react-hot-toast';
+import { useAuth } from '../context/AuthContext';
 import { formatCurrencyTND } from '../utils/formatters';
 
 const emptyForm = { titre: '', annee: '', duree: '', budget: '', domaineId: '', formateurId: '' };
 
 export default function FormationsPage() {
+  const { hasRole } = useAuth();
   const [formations, setFormations] = useState([]);
   const [domaines, setDomaines] = useState([]);
   const [formateurs, setFormateurs] = useState([]);
@@ -120,6 +122,8 @@ export default function FormationsPage() {
     ...rest[0],
   });
 
+  const isReadOnly = hasRole('responsable');
+
   return (
     <>
       <Topbar title="Formations" />
@@ -127,11 +131,13 @@ export default function FormationsPage() {
         <div className="page-header">
           <div>
             <h1 className="page-title">Formations</h1>
-            <p className="page-subtitle">Gérer les sessions de formation</p>
+            <p className="page-subtitle">Gérer le catalogue des formations et planifier des sessions</p>
           </div>
-          <button className="btn btn-primary" onClick={openAdd} id="add-formation-btn">
-            ＋ Nouvelle formation
-          </button>
+          {!isReadOnly && (
+            <button className="btn btn-primary" onClick={openAdd}>
+              ＋ Nouvelle formation
+            </button>
+          )}
         </div>
 
         {loading ? (
@@ -141,8 +147,9 @@ export default function FormationsPage() {
             <DataTable
               columns={columns}
               data={formations}
-              onEdit={openEdit}
-              onDelete={(item) => setDeleteModal({ open: true, item })}
+              onEdit={isReadOnly ? null : openEdit}
+              onDelete={isReadOnly ? null : (item) => setDeleteModal({ open: true, item })}
+              searchPlaceholder="Rechercher une formation..."
             />
           </div>
         )}

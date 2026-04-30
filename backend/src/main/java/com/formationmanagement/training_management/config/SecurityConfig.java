@@ -36,20 +36,26 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                // Public
+                // Public Endpoints
                 .requestMatchers("/api/auth/**").permitAll()
-                ///
-                /// ///
-                /// to delete if not working
-                //.requestMatchers("/error").permitAll() // <--- AJOUTE CETTE LIGNE
                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                // Admin only
-                .requestMatchers("/api/utilisateurs/**").hasRole("ADMINISTRATEUR")
-                .requestMatchers("/api/roles/**").hasRole("ADMINISTRATEUR")
-                .requestMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMINISTRATEUR")
-                // Responsable + Admin can view stats
+
+                // Manager (Responsable) has strictly NO modification rights anywhere
+                .requestMatchers(HttpMethod.POST, "/api/**").hasAnyRole("ADMINISTRATEUR", "SIMPLE UTILISATEUR")
+                .requestMatchers(HttpMethod.PUT, "/api/**").hasAnyRole("ADMINISTRATEUR", "SIMPLE UTILISATEUR")
+                .requestMatchers(HttpMethod.DELETE, "/api/**").hasAnyRole("ADMINISTRATEUR", "SIMPLE UTILISATEUR")
+
+                // Config & Admin Data - Only Admin can mutate. 
+                // GET is allowed for all to populate dropdowns.
+                .requestMatchers(HttpMethod.GET, "/api/utilisateurs/**", "/api/roles/**").hasRole("ADMINISTRATEUR")
+                .requestMatchers(HttpMethod.POST, "/api/domaines/**", "/api/structures/**", "/api/profils/**", "/api/employeurs/**").hasRole("ADMINISTRATEUR")
+                .requestMatchers(HttpMethod.PUT, "/api/domaines/**", "/api/structures/**", "/api/profils/**", "/api/employeurs/**").hasRole("ADMINISTRATEUR")
+                .requestMatchers(HttpMethod.DELETE, "/api/domaines/**", "/api/structures/**", "/api/profils/**", "/api/employeurs/**").hasRole("ADMINISTRATEUR")
+
+                // Stats Dashboard - Only Admin & Manager
                 .requestMatchers("/api/stats/**").hasAnyRole("ADMINISTRATEUR", "RESPONSABLE")
-                // Authenticated for everything else
+
+                // All other GET requests (Formations, Participants, etc) are accessible by all authenticated users
                 .anyRequest().authenticated()
             )
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);

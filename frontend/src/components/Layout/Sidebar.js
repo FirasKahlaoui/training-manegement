@@ -6,23 +6,23 @@ const navItems = [
   {
     section: 'Principal',
     links: [
-      { to: '/dashboard', icon: '📊', label: 'Tableau de bord', roles: null },
+      { to: '/dashboard', icon: '📊', label: 'Tableau de bord', roles: ['administrateur', 'responsable'] },
     ],
   },
   {
     section: 'Gestion',
     links: [
-      { to: '/formations',  icon: '🎓', label: 'Formations',   roles: ['administrateur','utilisateur'] },
-      { to: '/participants', icon: '👥', label: 'Participants', roles: ['administrateur','utilisateur'] },
-      { to: '/formateurs',  icon: '👨‍🏫', label: 'Formateurs',  roles: ['administrateur','utilisateur'] },
+      { to: '/formations',  icon: '🎓', label: 'Formations',   roles: ['administrateur', 'utilisateur', 'responsable', 'simple utilisateur'] },
+      { to: '/participants', icon: '👥', label: 'Participants', roles: ['administrateur', 'utilisateur', 'responsable', 'simple utilisateur'] },
+      { to: '/formateurs',  icon: '👨‍🏫', label: 'Formateurs',  roles: ['administrateur', 'utilisateur', 'responsable', 'simple utilisateur'] },
     ],
   },
   {
     section: 'Référentiels',
     links: [
-      { to: '/domaines',   icon: '🏷️',  label: 'Domaines',   roles: ['administrateur','utilisateur'] },
-      { to: '/structures', icon: '🏢',  label: 'Structures',  roles: ['administrateur','utilisateur'] },
-      { to: '/profils',    icon: '🪪',  label: 'Profils',     roles: ['administrateur','utilisateur'] },
+      { to: '/domaines',   icon: '🏷️',  label: 'Domaines',   roles: ['administrateur'] },
+      { to: '/structures', icon: '🏢',  label: 'Structures',  roles: ['administrateur'] },
+      { to: '/profils',    icon: '🪪',  label: 'Profils',     roles: ['administrateur'] },
     ],
   },
   {
