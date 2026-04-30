@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Topbar from '../components/Layout/Topbar';
+import Footer from '../components/Layout/Footer';
 import DataTable from '../components/ui/DataTable';
 import Modal from '../components/ui/Modal';
 import FormField from '../components/ui/FormField';
@@ -91,7 +92,7 @@ export default function UtilisateursPage() {
     { header: '#', key: 'id', render: (r) => <span style={{ color: 'var(--color-text-muted)', fontSize: 13 }}>#{r.id}</span> },
     { header: 'Login', accessor: 'login' },
     { header: 'Rôle', key: 'role', render: (r) => r.role
-      ? <span className={roleBadgeClass(r.role.libelle)}>{r.role.libelle}</span>
+      ? <span className={roleBadgeClass(r.role.nom)}>{r.role.nom}</span>
       : '—' },
   ];
 
@@ -103,7 +104,7 @@ export default function UtilisateursPage() {
 
   return (
     <>
-      <Topbar title="Utilisateurs" />
+      <Topbar breadcrumbs={['Paramètres', 'Utilisateurs']} />
       <div className="app-content">
         <div className="page-header">
           <div>
@@ -140,7 +141,7 @@ export default function UtilisateursPage() {
             <FormField label={modal.mode === 'add' ? 'Mot de passe' : 'Nouveau mot de passe (optionnel)'}
               type="password" required={modal.mode === 'add'} {...field('password')} placeholder="••••••••" />
             <FormField label="Rôle"
-              options={roles.map((r) => ({ value: r.id, label: r.libelle }))}
+              options={roles.map((r) => ({ value: r.id, label: r.nom }))}
               {...field('roleId')} />
           </div>
         </Modal>
@@ -156,6 +157,8 @@ export default function UtilisateursPage() {
         >
           <p>Supprimer l'utilisateur <strong>«{deleteModal.item?.login}»</strong> ?</p>
         </Modal>
+
+        <Footer />
       </div>
     </>
   );

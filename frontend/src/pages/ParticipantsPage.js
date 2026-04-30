@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Topbar from '../components/Layout/Topbar';
+import Footer from '../components/Layout/Footer';
 import DataTable from '../components/ui/DataTable';
 import Modal from '../components/ui/Modal';
 import FormField from '../components/ui/FormField';
@@ -108,7 +109,7 @@ export default function ParticipantsPage() {
 
   return (
     <>
-      <Topbar title="Participants" />
+      <Topbar breadcrumbs={['Gestion', 'Participants']} />
       <div className="app-content">
         <div className="page-header">
           <div>
@@ -172,6 +173,8 @@ export default function ParticipantsPage() {
         >
           <p>Supprimer <strong>{deleteModal.item?.nom} {deleteModal.item?.prenom}</strong> ?</p>
         </Modal>
+
+        <Footer />
       </div>
     </>
   );

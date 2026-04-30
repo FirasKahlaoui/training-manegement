@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Topbar from '../components/Layout/Topbar';
+import Footer from '../components/Layout/Footer';
 import DataTable from '../components/ui/DataTable';
 import Modal from '../components/ui/Modal';
 import FormField from '../components/ui/FormField';
@@ -127,7 +128,7 @@ export default function FormationsPage() {
 
   return (
     <>
-      <Topbar title="Formations" />
+      <Topbar breadcrumbs={['Gestion', 'Formations']} />
       <div className="app-content">
         <div className="page-header">
           <div>
@@ -205,6 +206,8 @@ export default function FormationsPage() {
         >
           <p>Êtes-vous sûr de vouloir supprimer la formation <strong>«{deleteModal.item?.titre}»</strong> ?</p>
         </Modal>
+
+        <Footer />
       </div>
     </>
   );

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Topbar from '../components/Layout/Topbar';
+import Footer from '../components/Layout/Footer';
 import DataTable from '../components/ui/DataTable';
 import Modal from '../components/ui/Modal';
 import FormField from '../components/ui/FormField';
@@ -58,7 +59,7 @@ function SimpleCrudPage({ title, subtitle, apiPath, entityLabel, topbarTitle }) 
 
   return (
     <>
-      <Topbar title={topbarTitle} />
+      <Topbar breadcrumbs={['Référentiels', topbarTitle]} />
       <div className="app-content">
         <div className="page-header">
           <div>
@@ -105,6 +106,8 @@ function SimpleCrudPage({ title, subtitle, apiPath, entityLabel, topbarTitle }) 
         >
           <p>Supprimer <strong>«{deleteModal.item?.libelle}»</strong> ?</p>
         </Modal>
+
+        <Footer />
       </div>
     </>
   );

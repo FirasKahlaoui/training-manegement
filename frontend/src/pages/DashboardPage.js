@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import Topbar from '../components/Layout/Topbar';
+import Footer from '../components/Layout/Footer';
+import DataTable from '../components/ui/DataTable';
 import api from '../api/axios';
 import { formatCurrencyTND, formatNumber } from '../utils/formatters';
 import {
@@ -10,12 +12,12 @@ import { GraduationCap, Users, Briefcase, Wallet } from 'lucide-react';
 
 // Strict color palette matching the SaaS design tokens
 const COLORS = {
-  primary: '#0B1F3A',
-  secondary: '#3A506B',
-  accent: '#2EC4B6',
-  accentDark: '#25A599',
+  primary: '#1E293B',    // Charcoal
+  secondary: '#64748B',  // Slate
+  accent: '#10B981',     // Emerald
+  accentDark: '#059669', // Dark Emerald
   muted: '#94A3B8',
-  chartPalette: ['#0B1F3A', '#2EC4B6', '#3A506B', '#E2E8F0', '#64748B']
+  chartPalette: ['#1E293B', '#10B981', '#64748B', '#E2E8F0', '#94A3B8']
 };
 
 export default function DashboardPage() {
@@ -147,9 +149,15 @@ export default function DashboardPage() {
     return null;
   };
 
+  const recentFormationsColumns = [
+    { header: 'Titre', accessor: 'titre' },
+    { header: 'Domaine', key: 'domaine', render: (r) => r.domaine?.libelle || '—' },
+    { header: 'Budget', key: 'budget', render: (r) => <span style={{ color: 'var(--color-accent)', fontWeight: 600 }}>{formatCurrencyTND(r.budget)}</span> },
+  ];
+
   return (
     <>
-      <Topbar title="Analytics" />
+      <Topbar breadcrumbs={['Principal', 'Tableau de bord']} />
       <div className="app-content">
         <div className="page-header" style={{ marginBottom: '24px' }}>
           <div>
@@ -219,62 +227,73 @@ export default function DashboardPage() {
           ))}
         </div>
 
-        {/* Charts Grid */}
-        <div className="charts-grid">
-          <div className="chart-card">
-            <h3 className="chart-title">Répartition par Domaine</h3>
-            {loading ? (
-              <div className="skeleton skeleton-card" style={{ height: '280px' }}></div>
-            ) : domainData.length === 0 ? (
-              <div className="empty-state"><p>Aucune donnée disponible pour ces filtres</p></div>
-            ) : (
-              <ResponsiveContainer width="100%" height={280}>
-                <PieChart>
-                  <Pie
-                    data={domainData}
-                    cx="50%" cy="50%"
-                    innerRadius={60}
-                    outerRadius={90}
-                    paddingAngle={2}
-                    dataKey="value"
-                    stroke="none"
-                  >
-                    {domainData.map((_, idx) => (
-                      <Cell key={idx} fill={COLORS.chartPalette[idx % COLORS.chartPalette.length]} />
-                    ))}
-                  </Pie>
-                  <RechartsTooltip contentStyle={{ borderRadius: '8px', border: '1px solid #E2E8F0', boxShadow: '0 4px 6px -1px rgba(11, 31, 58, 0.08)' }} />
-                  <Legend iconType="circle" wrapperStyle={{ fontSize: '13px', paddingTop: '20px' }} />
-                </PieChart>
-              </ResponsiveContainer>
-            )}
+        {/* Split Layout: 2/3 Table, 1/3 Charts */}
+        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '24px', marginTop: '24px' }} className="dashboard-split">
+          
+          <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
+            <div style={{ padding: '20px 24px', borderBottom: '1px solid var(--color-border)' }}>
+              <h3 className="chart-title" style={{ margin: 0, color: 'var(--color-primary)', fontWeight: 600 }}>Formations Récentes</h3>
+            </div>
+            <DataTable 
+              columns={recentFormationsColumns} 
+              data={activeFormations.slice(-5).reverse()} 
+              searchable={false}
+              loading={loading}
+            />
           </div>
 
-          <div className="chart-card">
-            <h3 className="chart-title">Évolution du Budget</h3>
-            {loading ? (
-              <div className="skeleton skeleton-card" style={{ height: '280px' }}></div>
-            ) : budgetByYearData.length === 0 ? (
-              <div className="empty-state"><p>Aucune donnée disponible pour ces filtres</p></div>
-            ) : (
-              <ResponsiveContainer width="100%" height={280}>
-                <BarChart data={budgetByYearData} margin={{ top: 10, right: 10, left: 30, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E2E8F0" />
-                  <XAxis dataKey="name" tick={{ fill: COLORS.muted, fontSize: 12 }} axisLine={false} tickLine={false} dy={10} />
-                  <YAxis 
-                    tickFormatter={(val) => `${(val / 1000).toFixed(0)}k`} 
-                    tick={{ fill: COLORS.muted, fontSize: 12 }} 
-                    axisLine={false} 
-                    tickLine={false} 
-                    dx={-10}
-                  />
-                  <RechartsTooltip content={<CurrencyTooltip />} cursor={{ fill: '#F1F5F9' }} />
-                  <Bar dataKey="value" fill={COLORS.primary} radius={[4, 4, 0, 0]} barSize={40} />
-                </BarChart>
-              </ResponsiveContainer>
-            )}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+            <div className="chart-card">
+              <h3 className="chart-title">Évolution du Budget</h3>
+              {loading ? (
+                <div className="skeleton skeleton-card" style={{ height: '220px' }}></div>
+              ) : budgetByYearData.length === 0 ? (
+                <div className="empty-state"><p>Aucune donnée</p></div>
+              ) : (
+                <ResponsiveContainer width="100%" height={220}>
+                  <BarChart data={budgetByYearData} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E2E8F0" />
+                    <XAxis dataKey="name" tick={{ fill: COLORS.muted, fontSize: 12 }} axisLine={false} tickLine={false} dy={10} />
+                    <YAxis hide />
+                    <RechartsTooltip content={<CurrencyTooltip />} cursor={{ fill: '#F8FAFC' }} />
+                    <Bar dataKey="value" fill={COLORS.accent} radius={[8, 8, 0, 0]} barSize={30} />
+                  </BarChart>
+                </ResponsiveContainer>
+              )}
+            </div>
+            
+            <div className="chart-card">
+              <h3 className="chart-title">Répartition par Domaine</h3>
+              {loading ? (
+                <div className="skeleton skeleton-card" style={{ height: '220px' }}></div>
+              ) : domainData.length === 0 ? (
+                <div className="empty-state"><p>Aucune donnée</p></div>
+              ) : (
+                <ResponsiveContainer width="100%" height={220}>
+                  <PieChart>
+                    <Pie
+                      data={domainData}
+                      cx="50%" cy="50%"
+                      innerRadius={50}
+                      outerRadius={80}
+                      paddingAngle={2}
+                      dataKey="value"
+                      stroke="none"
+                    >
+                      {domainData.map((_, idx) => (
+                        <Cell key={idx} fill={COLORS.chartPalette[idx % COLORS.chartPalette.length]} />
+                      ))}
+                    </Pie>
+                    <RechartsTooltip contentStyle={{ borderRadius: '8px', border: '1px solid #E2E8F0', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)' }} />
+                  </PieChart>
+                </ResponsiveContainer>
+              )}
+            </div>
           </div>
+
         </div>
+
+        <Footer />
       </div>
     </>
   );

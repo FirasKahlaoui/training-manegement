@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Topbar from '../components/Layout/Topbar';
+import Footer from '../components/Layout/Footer';
 import DataTable from '../components/ui/DataTable';
 import Modal from '../components/ui/Modal';
 import FormField from '../components/ui/FormField';
@@ -116,7 +117,7 @@ export default function FormateursPage() {
 
   return (
     <>
-      <Topbar title="Formateurs" />
+      <Topbar breadcrumbs={['Gestion', 'Formateurs']} />
       <div className="app-content">
         <div className="page-header">
           <div>
@@ -185,6 +186,8 @@ export default function FormateursPage() {
         >
           <p>Supprimer <strong>{deleteModal.item?.nom} {deleteModal.item?.prenom}</strong> ?</p>
         </Modal>
+
+        <Footer />
       </div>
     </>
   );

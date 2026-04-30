@@ -3,14 +3,14 @@
  * Example: 12500.5 -> "12 500,500 TND"
  */
 export const formatCurrencyTND = (value) => {
-  if (value == null || isNaN(value)) return '0,000 TND';
+  if (value == null || isNaN(value)) return '0,000 DT';
   
-  return new Intl.NumberFormat('fr-TN', {
-    style: 'currency',
-    currency: 'TND',
+  const numString = new Intl.NumberFormat('fr-TN', {
     minimumFractionDigits: 3,
     maximumFractionDigits: 3,
   }).format(value);
+
+  return `${numString} DT`;
 };
 
 /**
