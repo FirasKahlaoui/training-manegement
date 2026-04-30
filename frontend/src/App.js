@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -17,10 +17,26 @@ import './App.css';
 
 function AppShell() {
   const { user } = useAuth();
+  const [sidebarOpen, setSidebarOpen] = React.useState(false);
+  const location = useLocation();
+
+  // Close sidebar on navigation (mobile)
+  React.useEffect(() => {
+    setSidebarOpen(false);
+  }, [location]);
+
   if (!user) return null;
+
   return (
     <div className="app-layout">
-      <Sidebar />
+      {/* Mobile Overlay */}
+      <div 
+        className={`sidebar-overlay ${sidebarOpen ? 'visible' : ''}`} 
+        onClick={() => setSidebarOpen(false)}
+      />
+      
+      <Sidebar isOpen={sidebarOpen} />
+      
       <div className="app-main">
         <Routes>
           <Route path="/" element={
@@ -29,49 +45,49 @@ function AppShell() {
 
           <Route path="/dashboard" element={
             <ProtectedRoute roles={['administrateur', 'responsable']}>
-              <DashboardPage />
+              <DashboardPage onMenuClick={() => setSidebarOpen(true)} />
             </ProtectedRoute>
           } />
 
           <Route path="/formations" element={
             <ProtectedRoute roles={['administrateur', 'utilisateur', 'responsable', 'simple utilisateur']}>
-              <FormationsPage />
+              <FormationsPage onMenuClick={() => setSidebarOpen(true)} />
             </ProtectedRoute>
           } />
 
           <Route path="/participants" element={
             <ProtectedRoute roles={['administrateur', 'utilisateur', 'responsable', 'simple utilisateur']}>
-              <ParticipantsPage />
+              <ParticipantsPage onMenuClick={() => setSidebarOpen(true)} />
             </ProtectedRoute>
           } />
 
           <Route path="/formateurs" element={
             <ProtectedRoute roles={['administrateur', 'utilisateur', 'responsable', 'simple utilisateur']}>
-              <FormateursPage />
+              <FormateursPage onMenuClick={() => setSidebarOpen(true)} />
             </ProtectedRoute>
           } />
 
           <Route path="/domaines" element={
             <ProtectedRoute roles={['administrateur']}>
-              <DomainesPage />
+              <DomainesPage onMenuClick={() => setSidebarOpen(true)} />
             </ProtectedRoute>
           } />
 
           <Route path="/structures" element={
             <ProtectedRoute roles={['administrateur']}>
-              <StructuresPage />
+              <StructuresPage onMenuClick={() => setSidebarOpen(true)} />
             </ProtectedRoute>
           } />
 
           <Route path="/profils" element={
             <ProtectedRoute roles={['administrateur']}>
-              <ProfilsPage />
+              <ProfilsPage onMenuClick={() => setSidebarOpen(true)} />
             </ProtectedRoute>
           } />
 
           <Route path="/utilisateurs" element={
             <ProtectedRoute roles={['administrateur']}>
-              <UtilisateursPage />
+              <UtilisateursPage onMenuClick={() => setSidebarOpen(true)} />
             </ProtectedRoute>
           } />
 

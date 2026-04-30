@@ -2,8 +2,8 @@
 The TrainingMS system defines three distinct user profiles to ensure secure and efficient operations:
 \begin{itemize}
     \item \textbf{Simple User}: An operational user responsible for the daily management of training data. Their functionalities include authentication (login/logout), management of formations (creation, editing, deletion, and viewing), participants, and trainers. They also handle assignments, such as enrolling participants and associating trainers with specific sessions.
-    \item \textbf{Manager (Responsable)}: An analytical user focused on evaluation and decision-making. Unlike the Simple User, the Manager has **read-only access** to the system's core data and cannot perform any modification, creation, or deletion. Their primary focus is the statistics dashboard, where they analyze formation counts, participant data, and budget distribution through interactive charts and advanced filters.
-    \item \textbf{Administrator}: A high-level actor with full control over system configuration. Administrators manage user accounts and core referential data (domains, structures, profiles). By inheritance, the Administrator has access to all functionalities of **both** the Simple User (for data management) and the Manager (for analytical overview).
+    \item \textbf{Manager (Responsable)}: An analytical user focused on evaluation and decision-making. Unlike the Simple User, the Manager has \textbf{read-only access} to the system's core data and cannot perform any modification, creation, or deletion. Their primary focus is the statistics dashboard, where they analyze formation counts, participant data, and budget distribution through interactive charts and advanced filters.
+    \item \textbf{Administrator}: A high-level actor with full control over system configuration. Administrators manage user accounts and core referential data (domains, structures, profiles). By inheritance, the Administrator has access to all functionalities of \textbf{both} the Simple User (for data management) and the Manager (for analytical overview).
 \end{itemize}
 
 \section{Functional Requirements}
@@ -36,14 +36,39 @@ The Use Case Diagram illustrates the interactions between the identified actors 
 \end{figure}
 
 \subsection{Class Diagram}
-The core logic of the system is modeled through several interrelated entities:
-\begin{itemize}
-    \item \textbf{User \& Role}: Manage security and permissions.
-    \item \textbf{Training Session}: The central entity representing a training session.
-    \item \textbf{Participant \& Trainer}: Entities representing the human capital involved.
-    \item \textbf{Domain, Structure, Profile}: Referential entities that categorize the data.
-\end{itemize}
+The core logic of the system is modeled through several interrelated entities. The diagram below shows the domain model, including relationships between users, roles, training sessions, participants, and trainers.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{Figures/Class diagram.png}
+    \caption{TrainingMS System Class Diagram}
+    \label{fig_class_diagram}
+\end{figure}
+
 Relationships include a Many-to-Many association between \textit{Training Session} and \textit{Participant} (registrations) and Many-to-One links from \textit{Training Session} to \textit{Domain} and \textit{Trainer}.
+
+\section{Sequence Diagrams}
+Sequence diagrams illustrate the dynamic behavior of the system and the interactions between objects over time.
+
+\subsection{Authentication Process (Login)}
+This diagram details the exchange between the frontend, the AuthController, the AuthService, and the database during the user authentication process.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{Figures/Sequence_login.png}
+    \caption{Sequence Diagram: User Authentication}
+    \label{fig_seq_login}
+\end{figure}
+
+\subsection{Managing Training Sessions (Creation)}
+The following diagram illustrates the workflow for creating a new training session, showing the data validation and persistence layers.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{Figures/Create Formation.png}
+    \caption{Sequence Diagram: Adding a New Formation}
+    \label{fig_seq_add_form}
+\end{figure}
 
 \section{Database Design}
 The relational schema was designed in MySQL to ensure optimal storage and fast retrieval. The database includes:
@@ -53,3 +78,10 @@ The relational schema was designed in MySQL to ensure optimal storage and fast r
     \item \textbf{Integrity Rules}: Cascade operations and nullability constraints are defined to prevent orphaned records.
 \end{itemize}
 This structured approach guarantees that the data remains consistent throughout the application's lifecycle.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{Figures/Database Schema.png}
+    \caption{TrainingMS Logical Data Model (LDM)}
+    \label{fig_db_schema}
+\end{figure}

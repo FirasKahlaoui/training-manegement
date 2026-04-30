@@ -15,7 +15,7 @@ const typeOptions = [
   { value: 'externe', label: 'Externe' },
 ];
 
-export default function FormateursPage() {
+export default function FormateursPage({ onMenuClick }) {
   const { hasRole } = useAuth();
   const [formateurs, setFormateurs] = useState([]);
   const [employeurs, setEmployeurs] = useState([]);
@@ -117,7 +117,7 @@ export default function FormateursPage() {
 
   return (
     <>
-      <Topbar breadcrumbs={['Gestion', 'Formateurs']} />
+      <Topbar breadcrumbs={['Gestion', 'Formateurs']} onMenuClick={onMenuClick} />
       <div className="app-content">
         <div className="page-header">
           <div>

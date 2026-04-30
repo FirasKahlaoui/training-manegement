@@ -20,7 +20,7 @@ const COLORS = {
   chartPalette: ['#1E293B', '#10B981', '#64748B', '#E2E8F0', '#94A3B8']
 };
 
-export default function DashboardPage() {
+export default function DashboardPage({ onMenuClick }) {
   const [allFormations, setAllFormations] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -157,7 +157,7 @@ export default function DashboardPage() {
 
   return (
     <>
-      <Topbar breadcrumbs={['Principal', 'Tableau de bord']} />
+      <Topbar breadcrumbs={['Principal', 'Tableau de bord']} onMenuClick={onMenuClick} />
       <div className="app-content">
         <div className="page-header" style={{ marginBottom: '24px' }}>
           <div>
@@ -199,7 +199,7 @@ export default function DashboardPage() {
         </div>
 
         {/* KPI Cards */}
-        <div className="stats-grid" style={{ gridTemplateColumns: 'repeat(4, 1fr)' }}>
+        <div className="stats-grid">
           {[
             { label: 'Formations', value: formatNumber(kpis.formations), icon: <GraduationCap size={24} /> },
             { label: 'Participants', value: formatNumber(kpis.participants), icon: <Users size={24} /> },
@@ -218,7 +218,7 @@ export default function DashboardPage() {
                     <div className="stat-label">{stat.label}</div>
                     <div className="stat-icon">{stat.icon}</div>
                   </div>
-                  <div className="stat-value" style={{ color: stat.isCurrency ? COLORS.accentDark : COLORS.primary, fontSize: stat.isCurrency ? '24px' : '32px' }}>
+                  <div className="stat-value" style={{ color: stat.isCurrency ? COLORS.accentDark : COLORS.primary, fontSize: stat.isCurrency ? '22px' : '28px' }}>
                     {stat.value}
                   </div>
                 </>
@@ -228,7 +228,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Split Layout: 2/3 Table, 1/3 Charts */}
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '24px', marginTop: '24px' }} className="dashboard-split">
+        <div className="charts-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', marginTop: '24px' }}>
           
           <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
             <div style={{ padding: '20px 24px', borderBottom: '1px solid var(--color-border)' }}>

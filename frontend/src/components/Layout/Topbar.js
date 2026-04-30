@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { LogOut, Search, Bell, Plus } from 'lucide-react';
+import { LogOut, Search, Bell, Plus, Menu } from 'lucide-react';
 
 const roleLabels = {
   administrateur: 'Administrateur',
@@ -15,7 +15,7 @@ const roleBadges = {
   manager: 'badge badge-green',
 };
 
-export default function Topbar({ breadcrumbs }) {
+export default function Topbar({ breadcrumbs, onMenuClick }) {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -30,6 +30,13 @@ export default function Topbar({ breadcrumbs }) {
   return (
     <header className="topbar" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 24px' }}>
       <div className="topbar-left" style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '14px', fontWeight: 500 }}>
+        <button 
+          className="btn-icon mobile-toggle" 
+          onClick={onMenuClick}
+          style={{ marginRight: '8px' }}
+        >
+          <Menu size={20} />
+        </button>
         {breadcrumbs?.map((crumb, idx) => (
           <React.Fragment key={idx}>
             <span style={{ color: idx === breadcrumbs.length - 1 ? 'var(--color-primary)' : 'var(--color-text-muted)' }}>

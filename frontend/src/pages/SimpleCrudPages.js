@@ -8,7 +8,7 @@ import api from '../api/axios';
 import toast from 'react-hot-toast';
 import { Plus, X, Save } from 'lucide-react';
 
-function SimpleCrudPage({ title, subtitle, apiPath, entityLabel, topbarTitle }) {
+function SimpleCrudPage({ title, subtitle, apiPath, entityLabel, topbarTitle, onMenuClick }) {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [modal, setModal] = useState({ open: false, mode: 'add', item: null });
@@ -59,7 +59,7 @@ function SimpleCrudPage({ title, subtitle, apiPath, entityLabel, topbarTitle }) 
 
   return (
     <>
-      <Topbar breadcrumbs={['Référentiels', topbarTitle]} />
+      <Topbar breadcrumbs={['Référentiels', topbarTitle]} onMenuClick={onMenuClick} />
       <div className="app-content">
         <div className="page-header">
           <div>
@@ -113,17 +113,17 @@ function SimpleCrudPage({ title, subtitle, apiPath, entityLabel, topbarTitle }) 
   );
 }
 
-export function DomainesPage() {
+export function DomainesPage({ onMenuClick }) {
   return <SimpleCrudPage title="Domaines" subtitle="Gérer les domaines de formation"
-    apiPath="/api/domaines" entityLabel="Domaine" topbarTitle="Domaines" />;
+    apiPath="/api/domaines" entityLabel="Domaine" topbarTitle="Domaines" onMenuClick={onMenuClick} />;
 }
 
-export function StructuresPage() {
+export function StructuresPage({ onMenuClick }) {
   return <SimpleCrudPage title="Structures" subtitle="Gérer les structures / départements"
-    apiPath="/api/structures" entityLabel="Structure" topbarTitle="Structures" />;
+    apiPath="/api/structures" entityLabel="Structure" topbarTitle="Structures" onMenuClick={onMenuClick} />;
 }
 
-export function ProfilsPage() {
+export function ProfilsPage({ onMenuClick }) {
   return <SimpleCrudPage title="Profils" subtitle="Gérer les profils de postes"
-    apiPath="/api/profils" entityLabel="Profil" topbarTitle="Profils" />;
+    apiPath="/api/profils" entityLabel="Profil" topbarTitle="Profils" onMenuClick={onMenuClick} />;
 }

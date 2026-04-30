@@ -12,7 +12,7 @@ import { Plus } from 'lucide-react';
 
 const emptyForm = { titre: '', annee: '', duree: '', budget: '', domaineId: '', formateurId: '' };
 
-export default function FormationsPage() {
+export default function FormationsPage({ onMenuClick }) {
   const { hasRole } = useAuth();
   const [formations, setFormations] = useState([]);
   const [domaines, setDomaines] = useState([]);
@@ -128,7 +128,7 @@ export default function FormationsPage() {
 
   return (
     <>
-      <Topbar breadcrumbs={['Gestion', 'Formations']} />
+      <Topbar breadcrumbs={['Gestion', 'Formations']} onMenuClick={onMenuClick} />
       <div className="app-content">
         <div className="page-header">
           <div>

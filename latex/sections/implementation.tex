@@ -1,3 +1,11 @@
+\section{Environment Setup and Technical Requirements}
+The application development environment was configured with the following specific versions to ensure compatibility and stability:
+\begin{itemize}
+    \item \textbf{JDK 21}: Utilized for the backend to leverage the latest Java performance improvements and features.
+    \item \textbf{Node.js}: Required for building and running the React-based frontend development server.
+    \item \textbf{DBMS (MySQL 8.0)}: Used as the relational database engine for data persistence.
+\end{itemize}
+
 \section{Technology Stack}
 The application is built using a modern full-stack architecture to ensure scalability and ease of maintenance:
 \begin{itemize}
@@ -15,14 +23,34 @@ The application is built using a modern full-stack architecture to ensure scalab
     \label{fig_tech_stack}
 \end{figure}
 
-\section{System Architecture}
-The backend follows a layered architecture consisting of:
+\section{System Architecture and Security}
+\subsection{Security Implementation}
+Security is a core pillar of TrainingMS. The system implements \textbf{Spring Security} to handle the authentication and authorization flow. A custom \texttt{SecurityFilterChain} is configured to manage access controls, ensuring that:
 \begin{itemize}
-    \item \textbf{Controller Layer}: Exposes REST endpoints to the frontend.
-    \item \textbf{Service Layer}: Implements the core business logic and validations.
-    \item \textbf{Repository Layer}: Interface with the database using Spring Data JPA.
+    \item Authentication is stateless using \textbf{JSON Web Tokens (JWT)}.
+    \item Password encryption is handled via BCrypt.
+    \item Role-based access control (RBAC) is enforced, restricting sensitive operations to Administrators while allowing read-only access for Managers.
 \end{itemize}
-Security is managed via a custom filter that intercept requests to validate JWT signatures, ensuring that only authenticated users with appropriate roles can access specific resources.
+
+\subsection{API Documentation}
+The backend exposes a set of RESTful endpoints. The table below summarizes the key APIs used by the frontend to interact with the system:
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|}
+        \hline
+        \textbf{Method} & \textbf{Endpoint} & \textbf{Description} \\ \hline
+        POST & \texttt{/api/auth/login} & User authentication and JWT generation. \\ \hline
+        GET & \texttt{/api/formations} & Retrieve the list of all training sessions. \\ \hline
+        POST & \texttt{/api/formations} & Create a new training session (Admin/User). \\ \hline
+        GET & \texttt{/api/stats/dashboard} & Retrieve aggregated data for the dashboard. \\ \hline
+        GET & \texttt{/api/participants} & List all registered participants. \\ \hline
+    \end{tabular}
+    \caption{Core System Endpoints}
+    \label{tab_api_endpoints}
+\end{table}
+
+The backend follows a layered architecture consisting of the Controller layer (REST endpoints), the Service layer (Business logic), and the Repository layer (Data access via Spring Data JPA).
 
 \section{User Interface Design}
 The user interface is designed with a focus on productivity. It features a persistent sidebar for navigation, comprehensive data tables with search and pagination capabilities, and modal-based forms for data entry. The responsive layout ensures that the system remains accessible across different device types.
@@ -35,3 +63,10 @@ A critical component of TrainingMS is the statistics dashboard. It provides inte
     \item Budget utilization by organizational structure.
 \end{itemize}
 The module supports real-time filtering by year, domain, and trainer type. All financial data is formatted in Tunisian Dinars (TND) for local context. The dashboard automatically updates as filters are applied, providing managers with an accurate and instantaneous overview of the training landscape.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{Figures/Dashboard.png}
+    \caption{TrainingMS Analytical Dashboard}
+    \label{fig_dashboard}
+\end{figure}

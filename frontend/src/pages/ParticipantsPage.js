@@ -11,7 +11,7 @@ import { Plus } from 'lucide-react';
 
 const emptyForm = { nom: '', prenom: '', email: '', tel: '', profilId: '', structureId: '' };
 
-export default function ParticipantsPage() {
+export default function ParticipantsPage({ onMenuClick }) {
   const { hasRole } = useAuth();
   const [participants, setParticipants] = useState([]);
   const [profils, setProfils] = useState([]);
@@ -109,7 +109,7 @@ export default function ParticipantsPage() {
 
   return (
     <>
-      <Topbar breadcrumbs={['Gestion', 'Participants']} />
+      <Topbar breadcrumbs={['Gestion', 'Participants']} onMenuClick={onMenuClick} />
       <div className="app-content">
         <div className="page-header">
           <div>
